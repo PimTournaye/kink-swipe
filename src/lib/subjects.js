@@ -1,4 +1,4 @@
-[
+export const subjects = [
   {
     "context": "Feminist Theory",
     "quote": "The personal is political.",
