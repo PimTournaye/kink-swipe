@@ -17,6 +17,7 @@
 <div class="results">
   <div class="column">
     <h2>Swipe Lefts</h2>
+    <h3>You might not be into this stuff:</h3>
     <ul>
       {#each lefts as left}
         <li>{left.kink}</li>
@@ -26,6 +27,7 @@
 
   <div class="column border-r-black">
     <h2>Swipe Rights</h2>
+    <h3>You might be into this stuff:</h3>
     <ul>
       {#each rights as right}
         <li>{right.kink}</li>
@@ -36,15 +38,23 @@
 
 <style lang="postcss">
   .results {
-    @apply w-full mx-16 my-8 flex flex-row justify-between;
+    @apply w-full mx-16 my-8 flex flex-row justify-around;
   }
 
   ul {
-    @apply font-medium text-lg flex flex-col;
+    @apply font-light text-lg flex flex-col;
   }
 
   li {
     @apply my-2;
+  }
+
+  h2 {
+    @apply text-3xl font-bold mb-4;
+  }
+
+  h3 {
+    @apply text-xl font-medium mb-4;
   }
 
   .column {
