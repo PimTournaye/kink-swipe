@@ -1,12 +1,15 @@
 <script>
   import { fade } from 'svelte/transition';
   import Card from '$lib/Card.svelte';
+  import Results from '$lib/Results.svelte';
   import swipeStore from '$lib/stores.js';
   import { subjects } from '$lib/subjects';
   import { tick } from 'svelte';
 
   let currentSubject = subjects[0];
   let showCard = true;
+
+  let allSwiped = false
 
   // Swipe handlers
   async function handleSwipe(direction) {
@@ -32,6 +35,7 @@
     // Check if we have any cards left
     if (subjects.length === 0) {
       // If not, replace main content with results
+      allSwiped = true;
     } else {
       // If so, get the next card
       currentSubject = subjects[0];
@@ -41,6 +45,11 @@
   }
 </script>
   
+{#if allSwiped}
+  <div transition:fade={{duration: 500}}>
+    <Results left={$swipeStore.left} right={$swipeStore.right}/>
+  </div>
+  {:else if subjects.length !== 0}
 <main>
   <button id="left" class="bg-red-600 text-white"  on:click={() => handleSwipe('left')}>Swipe Left</button>
   {#if showCard}
@@ -50,6 +59,7 @@
   {/if}
   <button id="right" class="bg-green-600 text-white" on:click={() => handleSwipe('right')}>Swipe Right</button>
 </main>
+{/if}
 
 <style lang="postcss">
   main {
